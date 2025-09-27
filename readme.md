@@ -6,3 +6,4 @@
 
 ![GitHub all releases](https://img.shields.io/github/downloads/netmirrorapp/netmirrorapp/total?label=Total%20Downloads)
 ![GitHub release (by tag)](https://img.shields.io/github/downloads/netmirrorapp/netmirrorapp/v3.0/total?label=v3.0%20Downloads)
+![GitHub release (by tag)](https://img.shields.io/github/downloads/netmirrorapp/netmirrorapp/v2.2-unofficial/total?label=v2.2%20Downloads)
