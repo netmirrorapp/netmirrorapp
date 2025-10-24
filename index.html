@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetMirror – Stream Everything, Mirror Anywhere</title>
+    <meta name="description" content="Watch Netflix, Disney+ Hotstar, Prime Video, and more in one app. Stream in 4K, download offline, and cast to any TV with zero ads. Available on Android, Firestick, iOS, and smart TVs.">
+    <meta name="keywords" content="NetMirror, free streaming app, Netflix mirror, Disney+ Hotstar, Amazon Prime Video, HBO Max, 4K streaming, offline download, screen mirroring, Android TV, Firestick, iOS casting">
+    <link rel="canonical" href="https://nettmirrorapp.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fff;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header & Hero */
+        header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            padding: 4rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 C40,60 60,40 100,0 L100,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/></svg>') bottom/100% 100% no-repeat;
+            opacity: 0.3;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
+        .hero { text-align: center; }
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: review;
+            gap: 0.5rem;
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        .btn i { font-size: 1.3rem; }
+
+        /* Navigation */
+        nav {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        .logo img {
+            height: 36px;
+            width: auto;
+            border-radius: 8px;
+        }
+        .logo span {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .mobile-menu { display: none; cursor: pointer; font-size: 1.5rem; }
+
+        /* Main Content */
+        main { margin: 2rem auto; max-width: 1200px; padding: 0 1.5rem; }
+        .section {
+            background: white;
+            margin-bottom: 3rem;
+            border-radius: 1.5rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .section h2 {
+            font-size: 1.9rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 1.8rem 1.2rem;
+            border-radius: 1rem;
+            background: #f8f9ff;
+            transition: transform 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-8px); }
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .feature-card h3 { margin-bottom: 0.75rem; font-size: 1.2rem; }
+
+        /* Device Showcase */
+        .devices {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin: 2.5rem 0;
+        }
+        .device {
+            text-align: center;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .device:hover { opacity: 1; }
+        .device i { font-size: 2.8rem; color: var(--gray); margin-bottom: 0.5rem; }
+        .device span { display: block; font-size: 0.85rem; color: var(--gray); }
+
+        /* How It Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .step {
+            position: relative;
+            padding-left: 3rem;
+        }
+        .step::before {
+            content: attr(data-step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Testimonials */
+        .testimonial {
+            background: #f1f5f9;
+            padding: 1.8rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: -1rem;
+            left: 1rem;
+            font-size: 5rem;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        /* CTA Section */
+        .cta {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3.5rem 2rem;
+            border-radius: 1.5rem;
+            margin: 3rem 0;
+        }
+        .cta h2 { color: white; margin-bottom: 1rem; font-size: 2rem; }
+        .cta h2::after { background: white; }
+        .cta p { max-width: 600px; margin: 0 auto 2rem; opacity: 0.9; font-size: 1.1rem; }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: #cbd5e1;
+            padding: 3rem 1.5rem 1.5rem;
+            font-size: 0.9rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-links h4 { color: white; margin-bottom: 1rem; }
+        .footer-links a {
+            display: block;
+            color: #94a3b8;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover { color: white; }
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #334155;
+            color: #64748b;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .copyright .visit-counter {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 0.5rem 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .copyright .visit-counter i {
+            color: #fbbf24;
+            font-size: 1rem;
+            animation: pulse 2s infinite;
+        }
+        .copyright .visit-counter .count {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        /* Mobile Menu */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            padding: 2rem;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-nav.open { transform: translateY(0); display: block; }
+        .mobile-nav ul {
+            list-style: none;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        .mobile-nav li { margin: 1.5rem 0; }
+        .mobile-nav a {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .mobile-nav .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .section { padding: 2rem 1.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .btn { padding: 0.9rem 1.8rem; font-size: 1rem; }
+            .nav-links { display: none; }
+            .mobile-menu { display: block; }
+            .section { padding: 1.8rem 1.2rem; margin-bottom: 2rem; }
+            .section h2 { font-size: 1.7rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .feature-card { padding: 1.5rem 1rem; }
+            .feature-card i { font-size: 2.2rem; }
+            .devices { gap: 1.2rem; }
+            .device i { font-size: 2.2rem; }
+            .device span { font-size: 0.8rem; }
+            .steps { grid-template-columns: 1fr; }
+            .step { padding-left: 3.5rem; }
+            .step::before { width: 2.2rem; height: 2.2rem; font-size: 1rem; }
+            .cta { padding: 3rem 1.5rem; }
+            .cta h2 { font-size: 1.8rem; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .logo img { height: 32px; }
+            .logo span { font-size: 1.2rem; }
+            .copyright { flex-direction: column; gap: 1rem; }
+            .copyright .visit-counter { font-size: 0.8rem; padding: 0.4rem 0.9rem; }
+            .copyright .visit-counter .count { font-size: 0.9rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.9rem; }
+            .hero p { font-size: 0.95rem; }
+            .btn { padding: 0.8rem 1.5rem; font-size: 0.95rem; }
+            .section { padding: 1.5rem 1rem; border-radius: 1rem; }
+            .section h2 { font-size: 1.5rem; }
+            .feature-card { padding: 1.2rem 0.8rem; }
+            .feature-card h3 { font-size: 1.1rem; }
+            .testimonial { padding: 1.5rem; }
+            .testimonial::before { font-size: 4rem; top: -0.8rem; }
+            .cta { padding: 2.5rem 1rem; }
+            .cta p { font-size: 1rem; }
+            .mobile-nav a { font-size: 1.2rem; }
+            .logo img { height: 28px; }
+            .logo span { display: none; }
+            .copyright .visit-counter { font-size: 0.75rem; padding: 0.35rem 0.8rem; }
+            .copyright .visit-counter i { font-size: 0.9rem; }
+            .copyright .visit-counter .count { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Hero -->
+    <header>
+        <div class="container">
+            <div class="hero">
+                <h1>Stream Everything.<br>Mirror Anywhere.</h1>
+                <p>One app for Netflix, Disney+ Hotstar, Prime Video & more. No ads. 4K. Offline. Cast to any TV.</p>
+                <a href="https://nettmirrorapp.com" class="btn">
+                    Download Free Now
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="https://nettmirrorapp.com/wp-content/uploads/2025/05/netmirrorapk.webp" alt="NetMirror Logo">
+                <span>NetMirror</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how">How It Works</a></li>
+                <li><a href="#devices">Devices</a></li>
+                <li><a href="#safety">Safety</a></li>
+                <li><a href="https://nettmirrorapp.com" class="btn" style="background:var(--primary); color:white; padding:0.7rem 1.3rem; font-size:0.9rem;">
+                    Get App
+                </a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="close-btn">×</div>
+        <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#devices">Devices</a></li>
+            <li><a href="#safety">Safety</a></li>
+            <li><a href="https://nettmirrorapp.com" class="btn" style="background:white; color:var(--primary); margin:1rem auto; display:inline-flex;">
+                Download Now
+            </a></li>
+        </ul>
+    </div>
+
+    <main class="container">
+
+        <!-- Features -->
+        <section id="features" class="section">
+            <h2>Why Millions Love NetMirror</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-film"></i>
+                    <h3>All Your Favorites in One Place</h3>
+                    <p>Stream from Netflix, Disney+ Hotstar, Prime Video, HBO Max, Zee5, MX Player — no app switching.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tv"></i>
+                    <h3>Cast to Any Screen</h3>
+                    <p>Works with Chromecast, AirPlay, Miracast, Android TV, Firestick, and smart TVs.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-download"></i>
+                    <h3>Download & Watch Offline</h3>
+                    <p>Save movies and shows for flights, commutes, or when Wi-Fi disappears.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>No Ads, Ever</h3>
+                    <p>Enjoy uninterrupted viewing. No pop-ups. No distractions.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Blazing Fast & Light</h3>
+                    <p>Under 60MB. Works on old phones. Streams in 4K without lag.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Family Profiles</h3>
+                    <p>Separate watchlists, recommendations, and history for everyone.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Devices -->
+        <section id="devices" class="section">
+            <h2>Works Everywhere You Watch</h2>
+            <p style="text-align:center; margin-bottom:2rem; color:var(--gray);">Install in under 2 minutes. No sign-up needed.</p>
+            <div class="devices">
+                <div class="device">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Android Phone</span>
+                </div>
+                <div class="device">
+                    <i class="fab fa-android"></i>
+                    <span>Android TV</span>
+                </div>
+                <div class="device">
+                    <i class="fas fa-tv"></i>
+                    <span>Firestick</span>
+                </div>
+                <div class="device">
+                    <i class="fas fa-tablet-alt"></i>
+                    <span>iPad / Tablet</span>
+                </div>
+                <div class="device">
+                    <i class="fas fa-desktop"></i>
+                    <span>Windows / Mac</span>
+                </div>
+                <div class="device">
+                    <i class="fas fa-wifi"></i>
+                    <span>Smart TVs</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how" class="section">
+            <h2>Get Started in 3 Simple Steps</h2>
+            <div class="steps">
+                <div class="step" data-step="1">
+                    <h3>Download the App</h3>
+                    <p>Grab the APK from our secure site. Enable "Unknown Sources" in settings.</p>
+                </div>
+                <div class="step" data-step="2">
+                    <h3>Install & Open</h3>
+                    <p>Tap install. Open the app — no login, no email, no hassle.</p>
+                </div>
+                <div class="step" data-step="3">
+                    <h3>Start Streaming</h3>
+                    <p>Search, play, download, or cast. Everything works instantly.</p>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:3rem;">
+                <a href="https://nettmirrorapp.com" class="btn">
+                    Install NetMirror Now
+                </a>
+            </div>
+        </section>
+
+        <!-- Safety & Trust -->
+        <section id="safety" class="section">
+            <h2>Your Privacy & Safety Come First</h2>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
+                <div>
+                    <h3 style="font-size:1.3rem; margin-bottom:1rem; color:var(--primary);">
+                        Fully Private
+                    </h3>
+                    <p>No accounts. No tracking. No data collection. Your watch history stays on your device.</p>
+                </div>
+                <div>
+                    <h3 style="font-size:1.3rem; margin-bottom:1rem; color:var(--primary);">
+                        Virus-Free & Clean
+                    </h3>
+                    <p>Scanned by VirusTotal. 65/66 engines clean. Regular updates. No bloatware.</p>
+                </div>
+                <div>
+                    <h3 style="font-size:1.3rem; margin-bottom:1rem; color:var(--primary);">
+                        Use a VPN (Recommended)
+                    </h3>
+                    <p>Pair with Surfshark or any VPN for extra privacy, especially in India or restricted regions.</p>
+                </div>
+                <div>
+                    <h3 style="font-size:1.3rem; margin-bottom:1rem; color:var(--primary);">
+                        Legal Note
+                    </h3>
+                    <p>Best for public domain content and free shows. Avoid copyrighted streams to stay safe.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section">
+            <h2>What Users Are Saying</h2>
+            <div class="testimonial">
+                <p>"Finally, one app for all my shows. No more switching between Netflix, Hotstar, and Prime. Casting to my TV is instant!"</p>
+                <p style="margin-top:1rem; font-weight:600; color:var(--primary);">— Rajesh, Mumbai</p>
+            </div>
+            <div class="testimonial">
+                <p>"Downloaded on Firestick in 2 minutes. 4K playback with no buffering. Better than official apps!"</p>
+                <p style="margin-top:1rem; font-weight:600; color:var(--primary);">— Priya, Delhi</p>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="cta" id="download">
+            <h2>Ready to Ditch App-Hopping?</h2>
+            <p>Join over 500,000 users streaming smarter. 100% free. No subscriptions. No ads.</p>
+            <a href="https://nettmirrorapp.com" class="btn" style="background:white; color:var(--primary); font-size:1.2rem; padding:1.2rem 2.5rem;">
+                Download NetMirror Free
+            </a>
+            <p style="margin-top:1.5rem; font-size:0.9rem; opacity:0.8;">
+                Available for Android, Firestick, Android TV, and more.<br>
+                iOS users: Use via Safari + Home Screen.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Footer with Visit Counter -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#" class="logo" style="color:white; margin-bottom:1rem;">
+                        <img src="https://nettmirrorapp.com/wp-content/uploads/2025/05/netmirrorapk.webp" alt="NetMirror Logo" style="height:32px; filter: brightness(0) invert(1);">
+                        <span>NetMirror</span>
+                    </a>
+                    <p>Your all-in-one streaming companion. Free. Fast. Private.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#features">Features</a>
+                    <a href="#how">How to Install</a>
+                    <a href="#safety">Safety</a>
+                    <a href="https://nettmirrorapp.com">Download</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <a href="https://nettmirrorapp.com/faq">FAQ</a>
+                    <a href="https://nettmirrorapp.com/contact">Contact</a>
+                    <a href="https://nettmirrorapp.com/privacy">Privacy Policy</a>
+                    <a href="https://nettmirrorapp.com/terms">Terms</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <span>© 2025 NetMirror. All rights reserved.</span>
+                <span>Made with <i class="fas fa-heart" style="color:#ec4899;"></i> for streamers everywhere.</span>
+                <!-- Beautiful Visit Counter in Footer -->
+                <div class="visit-counter">
+                    <i class="fas fa-eye"></i>
+                    <span>Visitors Today:</span>
+                    <span class="count" id="visitCount">0</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const closeBtn = document.querySelector('.close-btn');
+
+        mobileMenu.addEventListener('click', () => {
+            mobileNav.classList.add('open');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            mobileNav.classList.remove('open');
+        });
+
+        mobileNav.addEventListener('click', (e) => {
+            if (e.target === mobileNav) {
+                mobileNav.classList.remove('open');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    if (mobileNav.classList.contains('open')) {
+                        mobileNav.classList.remove('open');
+                    }
+                }
+            });
+        });
+
+        // Visit Counter (Client-Side, Daily Reset)
+        const visitCountEl = document.getElementById('visitCount');
+        const today = new Date().toDateString();
+        const stored = localStorage.getItem('netmirrorVisit');
+
+        let visits = 0;
+        if (stored) {
+            const { date, count } = JSON.parse(stored);
+            if (date === today) {
+                visits = count + 1;
+            } else {
+                visits = 1;
+            }
+        } else {
+            visits = 1;
+        }
+
+        localStorage.setItem('netmirrorVisit', JSON.stringify({ date: today, count: visits }));
+        visitCountEl.textContent = visits.toLocaleString();
+    </script>
+</body>
+</html>
