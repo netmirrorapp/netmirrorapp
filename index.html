@@ -60,7 +60,7 @@
         }
         .btn {
             display: inline-flex;
-            align-items: review;
+            align-items: center;
             gap: 0.5rem;
             background: white;
             color: var(--primary);
@@ -287,8 +287,9 @@
             gap: 1.5rem;
             flex-wrap: wrap;
         }
-        .copyright .visit-counter {
-            background: rgba(255, 255, 255, 0.1);
+        .copyright .visit-counter,
+        .copyright .mirror-link {
+            background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
             border-radius: 1rem;
             padding: 0.5rem 1rem;
@@ -299,11 +300,20 @@
             color: #e2e8f0;
             font-size: 0.85rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: background 0.3s ease;
+        }
+        .copyright .visit-counter:hover,
+        .copyright .mirror-link:hover {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
         }
         .copyright .visit-counter i {
             color: #fbbf24;
             font-size: 1rem;
             animation: pulse 2s infinite;
+        }
+        .copyright .mirror-link i {
+            color: #60a5fa;
         }
         .copyright .visit-counter .count {
             font-family: 'Courier New', monospace;
@@ -382,7 +392,8 @@
             .logo img { height: 32px; }
             .logo span { font-size: 1.2rem; }
             .copyright { flex-direction: column; gap: 1rem; }
-            .copyright .visit-counter { font-size: 0.8rem; padding: 0.4rem 0.9rem; }
+            .copyright .visit-counter,
+            .copyright .mirror-link { font-size: 0.8rem; padding: 0.4rem 0.9rem; }
             .copyright .visit-counter .count { font-size: 0.9rem; }
         }
 
@@ -401,8 +412,10 @@
             .mobile-nav a { font-size: 1.2rem; }
             .logo img { height: 28px; }
             .logo span { display: none; }
-            .copyright .visit-counter { font-size: 0.75rem; padding: 0.35rem 0.8rem; }
-            .copyright .visit-counter i { font-size: 0.9rem; }
+            .copyright .visit-counter,
+            .copyright .mirror-link { font-size: 0.75rem; padding: 0.35rem 0.8rem; }
+            .copyright .visit-counter i,
+            .copyright .mirror-link i { font-size: 0.9rem; }
             .copyright .visit-counter .count { font-size: 0.85rem; }
         }
     </style>
@@ -416,7 +429,7 @@
                 <h1>Stream Everything.<br>Mirror Anywhere.</h1>
                 <p>One app for Netflix, Disney+ Hotstar, Prime Video & more. No ads. 4K. Offline. Cast to any TV.</p>
                 <a href="https://nettmirrorapp.com" class="btn">
-                    Download Free Now
+                    <i class="fas fa-download"></i> Download Free Now
                 </a>
             </div>
         </div>
@@ -435,7 +448,7 @@
                 <li><a href="#devices">Devices</a></li>
                 <li><a href="#safety">Safety</a></li>
                 <li><a href="https://nettmirrorapp.com" class="btn" style="background:var(--primary); color:white; padding:0.7rem 1.3rem; font-size:0.9rem;">
-                    Get App
+                    <i class="fas fa-arrow-down"></i> Get App
                 </a></li>
             </ul>
             <div class="mobile-menu">
@@ -453,7 +466,7 @@
             <li><a href="#devices">Devices</a></li>
             <li><a href="#safety">Safety</a></li>
             <li><a href="https://nettmirrorapp.com" class="btn" style="background:white; color:var(--primary); margin:1rem auto; display:inline-flex;">
-                Download Now
+                <i class="fas fa-download"></i> Download Now
             </a></li>
         </ul>
     </div>
@@ -548,7 +561,7 @@
             </div>
             <div style="text-align:center; margin-top:3rem;">
                 <a href="https://nettmirrorapp.com" class="btn">
-                    Install NetMirror Now
+                    <i class="fas fa-rocket"></i> Install NetMirror Now
                 </a>
             </div>
         </section>
@@ -559,25 +572,25 @@
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
                 <div>
                     <h3 style="font-size:1.3rem; margin-bottom:1rem; color:var(--primary);">
-                        Fully Private
+                        <i class="fas fa-lock"></i> Fully Private
                     </h3>
                     <p>No accounts. No tracking. No data collection. Your watch history stays on your device.</p>
                 </div>
                 <div>
                     <h3 style="font-size:1.3rem; margin-bottom:1rem; color:var(--primary);">
-                        Virus-Free & Clean
+                        <i class="fas fa-shield-virus"></i> Virus-Free & Clean
                     </h3>
                     <p>Scanned by VirusTotal. 65/66 engines clean. Regular updates. No bloatware.</p>
                 </div>
                 <div>
                     <h3 style="font-size:1.3rem; margin-bottom:1rem; color:var(--primary);">
-                        Use a VPN (Recommended)
+                        <i class="fas fa-globe"></i> Use a VPN (Recommended)
                     </h3>
                     <p>Pair with Surfshark or any VPN for extra privacy, especially in India or restricted regions.</p>
                 </div>
                 <div>
                     <h3 style="font-size:1.3rem; margin-bottom:1rem; color:var(--primary);">
-                        Legal Note
+                        <i class="fas fa-exclamation-triangle"></i> Legal Note
                     </h3>
                     <p>Best for public domain content and free shows. Avoid copyrighted streams to stay safe.</p>
                 </div>
@@ -602,7 +615,7 @@
             <h2>Ready to Ditch App-Hopping?</h2>
             <p>Join over 500,000 users streaming smarter. 100% free. No subscriptions. No ads.</p>
             <a href="https://nettmirrorapp.com" class="btn" style="background:white; color:var(--primary); font-size:1.2rem; padding:1.2rem 2.5rem;">
-                Download NetMirror Free
+                <i class="fas fa-download"></i> Download NetMirror Free
             </a>
             <p style="margin-top:1.5rem; font-size:0.9rem; opacity:0.8;">
                 Available for Android, Firestick, Android TV, and more.<br>
@@ -612,7 +625,7 @@
 
     </main>
 
-    <!-- Footer with Visit Counter -->
+    <!-- Footer with Visit Counter + DO-FOLLOW GitLab Mirror Link -->
     <footer>
         <div class="container">
             <div class="footer-grid">
@@ -641,12 +654,20 @@
             <div class="copyright">
                 <span>© 2025 NetMirror. All rights reserved.</span>
                 <span>Made with <i class="fas fa-heart" style="color:#ec4899;"></i> for streamers everywhere.</span>
-                <!-- Beautiful Visit Counter in Footer -->
+
+                <!-- Visit Counter -->
                 <div class="visit-counter">
                     <i class="fas fa-eye"></i>
                     <span>Visitors Today:</span>
                     <span class="count" id="visitCount">0</span>
                 </div>
+
+                <!-- DO-FOLLOW Mirror Link: Full Link Juice from GitHub to GitLab -->
+                <a href="https://netmirrorapp-b5861f.gitlab.io/" 
+                   class="mirror-link" 
+                   title="Mirror hosted on GitLab Pages">
+                    <i class="fas fa-code-branch"></i> Mirror on GitLab
+                </a>
             </div>
         </div>
     </footer>
@@ -685,7 +706,7 @@
             });
         });
 
-        // Visit Counter (Client-Side, Daily Reset)
+        // Visit Counter (Daily Reset)
         const visitCountEl = document.getElementById('visitCount');
         const today = new Date().toDateString();
         const stored = localStorage.getItem('netmirrorVisit');
